@@ -1,11 +1,8 @@
-## install latest version of npm
-```shell script
+## npm
+```s
 npm install npm@latest -g
-```
-## install typeScript etc
-```shell script
-npm i -D cucumber cucumber-tsflow cucumber-pretty ts-node typescript chai
-npm i -D @types/cucumber @types/chai @types/body-parser @types/express @types/node
+npm update
+npm outdated
 ```
 
 ## init
@@ -14,32 +11,23 @@ npm init -y
 tsc --init
 ```
 
-## install other dependencies
+## setup
 ```shell script
-npm i -D chromedriver @types/chromedriver
-npm i -D iedriver @types/iedriver
-npm i -D selenium-webdriver @types/selenium-webdriver
-npm i -D reflect-metadata @types/reflect-metadata
+npm install
 ```
 
-## fix chrome version error(make sure using node_modules/chromedriver instead of /node_modules/selenium-webdriver/chrome)
-* uninstall selenium-webdriver/chrome
-* specify chromedriver path while start browser
+* specify driver path while start browser
 ```typescript
 const chromePath = require('chromedriver').path;
-driver = new Builder(chromePath).....
+driver = new Builder(chromePath)
 ```
 ## fix function time out
 ```typescript
 import {setDefaultTimeout} from 'cucumber';
 setDefaultTimeout(50 * 1000);
 ```
-
-## install npm extension in VS Code
-
-## create the project structure
-root -> features && 
-     -> src/steps
+## fix ie driver not working
+set window display size = 100%
 
 ## config
 ```js

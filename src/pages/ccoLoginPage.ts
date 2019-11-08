@@ -7,7 +7,6 @@ import { page } from '.';
 export class LoginPage extends Page {
     login = async (user: ccoUser) => {
         if (browser.browserName === "internet explorer") {
-			this.sleep(2);
             await this.waitTitlePresent("This site isn’t secure");
             await browser.driver.findElement(By.id("infoBlockIDImage")).click();
             await browser.driver.findElement(By.id("overridelink")).click();

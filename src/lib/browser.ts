@@ -1,5 +1,6 @@
 const webdriver = require('selenium-webdriver');
 import { WebDriver, Capabilities, By } from 'selenium-webdriver';
+import { exists } from 'fs';
 const chrome = require('chromedriver').path;
 const ie = require('iedriver').path;
 
@@ -13,7 +14,7 @@ export class browser {
     }
 
     async launch(url: string = "https://localhost/orrs.web") {
-        if (browser.browserName === "internet explorer") {
+        if (browser.browserName === "internet explorer" || browser.browserName == "ie") {
             let cap = webdriver.Capabilities.ie();
             cap.set("ignoreProtectedModeSettings", true);
             cap.set("ignoreZoomSetting", true);
@@ -27,8 +28,8 @@ export class browser {
                 .forBrowser("chrome")
                 .withCapabilities(Capabilities.chrome())
                 .build();
-            browser.driver.manage().window().maximize();
         }
+        await browser.driver.manage().window().maximize();
         await browser.driver.get(url);
     }
 

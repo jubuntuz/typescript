@@ -11,8 +11,9 @@ export class orrsCensusPage extends Page {
         await this.sleep(5);//added for ie
     }
 
-    getModalityOptions = async () =>
+    getModalityOptions = async () => 
         await this.getOptions(By.id("ddlModality"));
+    
 
     modality = async (modality: string) => {
         await this.type(By.id("txtModalityCode"), modality + "\n");

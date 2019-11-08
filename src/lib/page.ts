@@ -68,12 +68,15 @@ export class Page {
         this.find(By.css(css))
             .then(() => browser.driver.executeScript("document.querySelectorAll('" + css + "')[" + index + "].click()"));
 
+    getAttrById = (id: string) =>
+        this.find(By.id(id))
+            .then(async (element) => await element.getAttribute("type"));
+
     //by: droplist locator
-    getOptions = async (by: By) => {
-        let elements = await this.find(by)
-            .then(async (dropbox) => dropbox.findElements(By.css("option")));
-        return await Promise.all(elements.map(async (element) => await element.getAttribute("value")));
-    }
+    getOptions = async (by: By) =>
+        await this.find(by)
+            .then(async (dropbox) => dropbox.findElements(By.css("option")))
+            .then(async (elements) => Promise.all(elements.map(async (element) => await element.getAttribute("value")));
 
     isDisplayed = (by: By) =>
         this.find(by)
