@@ -9,6 +9,7 @@ export class orrsBasicRegistration {
         Object.assign(this.visit, registration);
         Object.assign(this.demographic, registration);
         Object.assign(this.payment, registration);
+     
     }
 }
 

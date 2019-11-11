@@ -15,7 +15,7 @@ Given('I launch ORRS as a user:', async function (dataTable: TableDefinition) {
     if (dataTable !== undefined) {
         Object.assign(user, dataTable.hashes());
     }
-    await new browser("internet explorer").launch();
+    await new browser(/*"internet explorer"*/).launch();
     await new LoginPage().login(user);
 });
 
@@ -50,7 +50,7 @@ Then('I should not see any of {string} in Modality dropdown list', async functio
     console.log("invalid:" + invalid);
     //get modalities from dropdown list
     var modalities = await page.getModalityOptions();
-    console.log("dropdown list:" + modalities);
+    console.log(`dropdown list: ${modalities}`);
     invalid.forEach(async (mod) =>
         await expect(modalities).to.not.include(mod.trim()));
 });

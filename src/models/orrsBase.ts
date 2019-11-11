@@ -11,7 +11,7 @@ export class Visit {
 export class Demographic {
     name = {
         lastname: "Automation",
-        firstname: "Stupid IE"
+        firstname: "poc"
     }
     bod = {
         year: "1980",

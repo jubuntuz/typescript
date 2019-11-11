@@ -11,6 +11,8 @@ export class Page {
 
     title = () => browser.driver.getTitle();
 
+    isPresent = (by: By) =>
+        browser.driver.findElements(by).then(found => found.length != 0);
 
     text = (by: By) =>
         this.find(by)
@@ -73,10 +75,17 @@ export class Page {
             .then(async (element) => await element.getAttribute("type"));
 
     //by: droplist locator
-    getOptions = async (by: By) =>
-        await this.find(by)
-            .then(async (dropbox) => dropbox.findElements(By.css("option")))
-            .then(async (elements) => Promise.all(elements.map(async (element) => await element.getAttribute("value")));
+    getOptions = async (by: By) => {
+        let elements = await this.find(by)
+            .then(async (dropbox) => dropbox.findElements(By.css("option")));
+        if (browser.browserName === "internet explorer" || browser.browserName === "ie") {
+            return await elements[0].getAttribute("value");
+        } else {
+            return await Promise.all(elements.map(async (element) => await element.getAttribute("value")));
+        }
+
+
+    }
 
     isDisplayed = (by: By) =>
         this.find(by)

@@ -62,7 +62,8 @@ export class orrsBasicRegistrationPage extends Page {
         await this.fillForm(this.form, registerObj);
         await this.sleep(1);
         await this.click(this.submitBtn);
-        if (await this.find(By.id("MainContent_PatientMatch_btnContinue")) !== undefined) {//warning div
+        await this.sleep(1);
+        if (await this.isPresent(By.id("MainContent_PatientMatch_btnContinue"))) {//warning div
             await this.click(By.id("MainContent_PatientMatch_btnContinue"));
         }
         await this.sleep(1);

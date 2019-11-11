@@ -153,14 +153,13 @@ Feature: ORRS smoke test
    @registration
   Scenario Outline: As a user, I should be able to register a patient
     When I register a Pregnancy patient at <location>
-      | firstname |
-      | Pregnancy |
+      |  |
+      |  |
     Then I should see patientId in the page
     Examples:
-      | hospital | location |
-      | "WRH"    | "DMA"    |
-      | "WRH"    | "SPHD"   |
-
+      | location |
+      | "DMA"    |
+      | "SPHD"   |
 
 
   @treatment
