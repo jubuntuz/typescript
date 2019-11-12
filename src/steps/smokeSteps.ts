@@ -2,29 +2,25 @@ import { TableDefinition, Given, When, Then, setDefaultTimeout } from 'cucumber'
 //import { expect } from 'chai';
 var expect = require("chai").expect;
 import { browser } from './../lib/browser';
-import { ccoUser, orrsBasicRegistration } from '../models';
-import { LoginPage, orrsBasicRegistrationPage, orrsCensusPage } from './../pages';
+import { user, Registration } from '../models';
+import { loginPage, registrationPage, censusPage } from './../pages';
+
 let page = require("./../pages").page;
 
 setDefaultTimeout(500 * 1000);
 
 Given('I launch ORRS as a user:', async function (dataTable: TableDefinition) {
     // Write code here that turns the phrase above into concrete actions
-
-    let user = new ccoUser();
-    if (dataTable !== undefined) {
-        Object.assign(user, dataTable.hashes());
-    }
-    await new browser("internet explorer").launch();
-    await new LoginPage().login(user);
+    Object.assign(user, dataTable.hashes()[0]);
+    await new browser(/*"ie"*/).launch();
+    await new loginPage().login();
 });
 
 When('I register a Pregnancy patient at {string}', async function (location: string, dataTable: TableDefinition) {
     // Write code here that turns the phrase above into concrete actions
-    page = await new orrsBasicRegistrationPage();
+    page = await new registrationPage().launch("Pregnancy");
     await page.launch("Pregnancy");
-    let registration = await new orrsBasicRegistration(dataTable.hashes());
-    registration.visit.location = location;
+    let registration = await new Registration(dataTable.hashes());
     await page.register(registration);
 });
 
@@ -35,7 +31,7 @@ Then('I should see patientId in the page', function () {
 
 Given('I have a patient in manage Census page at {string}', async function (location: string) {
     // Write code here that turns the phrase above into concrete actions
-    page = await new orrsCensusPage();
+    page = await new censusPage();
     await page.launch(location, "Manage Census");
 });
 

@@ -1,33 +1,36 @@
-## npm
-```s
-npm install npm@latest -g
-npm update
-npm outdated
-```
-
 ## init
 ```shell script
 npm init -y
 tsc --init
 ```
 
-## setup
+## install dependencies
 ```shell script
 npm install
 ```
+
+## npm install
+```s
+npm install npm@latest -g
+npm update
+npm outdated
+```
+
+## fix ie driver not working
+window display size = 100%
+internet option - security - protected mode: enable or disable for all zones
+
 
 * specify driver path while start browser
 ```typescript
 const chromePath = require('chromedriver').path;
 driver = new Builder(chromePath)
 ```
-## fix function time out
+## fix step function time out
 ```typescript
 import {setDefaultTimeout} from 'cucumber';
 setDefaultTimeout(50 * 1000);
 ```
-## fix ie driver not working
-set window display size = 100%
 
 ## config
 ```js

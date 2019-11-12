@@ -1,7 +1,7 @@
-export * from './ccoLoginPage';
-export * from './orrsBasicRegistrationPage';
-export * from './orrsCensusPage';
+export * from './loginPage';
+export * from './registrationPage';
+export * from './censusPage';
 import { Page } from './../lib/page'
 
-export var page: Page;
+
 

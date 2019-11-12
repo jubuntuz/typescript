@@ -11,6 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "application": "http://localhost/orrs.web",
   "devDependencies": {
     "@types/body-parser": "^1.17.1",
     "@types/chai": "^4.2.2",

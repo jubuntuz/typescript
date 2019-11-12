@@ -3,15 +3,14 @@ Feature: ORRS smoke test
 
   Scenario:login
     Given I launch ORRS as a user:
-      | username      | password |
-      | junhong.zhang |          |
-
+      | row1-1 | row1-2 |
+      | 2-1    | 3-2    |
 
   @registration
   Scenario Outline: As a user, I should be able to register a patient
     When I register a Pregnancy patient at <location>
-      |  |
-      |  |
+      | firstname |
+      | Pregnancy |
     Then I should see patientId in the page
     Examples:
       | location |

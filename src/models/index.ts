@@ -1,2 +1,4 @@
-export * from './ccoUser';
-export * from './orrsBasicRegistration';
+export * from './user';
+export * from './registration';
+
+export const blank: string = "";
