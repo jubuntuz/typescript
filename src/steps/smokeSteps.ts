@@ -15,7 +15,7 @@ Given('I launch ORRS as a user:', async function (dataTable: TableDefinition) {
     if (dataTable !== undefined) {
         Object.assign(user, dataTable.hashes());
     }
-    await new browser(/*"internet explorer"*/).launch();
+    await new browser("internet explorer").launch();
     await new LoginPage().login(user);
 });
 
