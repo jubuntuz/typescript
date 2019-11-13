@@ -1,25 +1,35 @@
 import { blank } from ".";
+import { read } from "./../lib";
 
 export class Registration {
-    hospital: string = blank;
-    location: string = blank;
-    lastname: string = blank;
-    firstname: string = blank;
-    bod: Date = new Date();
-    gender: string = blank;
-    race: string = blank;
-    street: string = blank;
-    addrProvince: string = blank;
-    postalcode: string = blank;
-    responsibilityForPayment: string = blank;
-    hcnNotAvailable: boolean = false;
-    hcnNo: string = blank;
-    hcnProvince: string = blank;
-    date: Date = new Date();
+    hospital!: string;
+    location!: string;
+    lastname!: string;
+    firstname!: string;
+    bod!: Date;
+    gender!: string;
+    race!: string;
+    street!: string;
+    addrProvince!: string;
+    postalcode!: string;
+    responsibilityForPayment!: string;
+    hcnNotAvailable!: boolean;
+    hcnNo!: string;
+    hcnProvince!: string;
+    date!: Date;
 
-    constructor(registration: object) {
-        Object.assign(this, registration);
+    basic = (reg: object) => {
+        let def = Object.assign(this as Registration, read("registration").basic, reg);
+        console.log(def);
+        def.date = (def.date === undefined || def.date === "") ? new Date() : new Date(def.date);
+        def.hcnNotAvailable = JSON.parse(def.hcnNotAvailable);
+        console.log(def);
+        console.log(`${typeof (def.date)}, ${typeof (def.hcnNotAvailable)}`);
+        
+        process.exit();
+        return def;
     }
+
 
 }
 

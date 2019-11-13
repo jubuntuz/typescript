@@ -1,7 +1,9 @@
+const test = require('./../../package.json').test;
+
 export var user = {
-    domain: "ccodsqa",
-    username: "junhong.zhang",
-    password: "G0dkn0ws!123"
+    domain: test.domain,
+    username: test.user,
+    password: test.password
 }
 
 

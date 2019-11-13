@@ -1,5 +1,5 @@
 import { Builder, By, until } from 'selenium-webdriver';
-import { Page, findBy } from '../lib/page';
+import { Page, findBy } from './../lib';
 
 export class censusPage extends Page {
 

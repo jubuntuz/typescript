@@ -20,12 +20,24 @@ npm outdated
 window display size = 100%
 internet option - security - protected mode: enable or disable for all zones
 
+## url
+* TFS - ORN
+https://tfs.cancercare.on.ca/tfs/CCO 
+* ORRS - QA
+https://qaorrs.renalnetwork.on.ca/orrs
+* ORRS
+https://localhost/orrs.web
 
-* specify driver path while start browser
-```typescript
-const chromePath = require('chromedriver').path;
-driver = new Builder(chromePath)
-```
+* workday
+https://wd3.myworkday.com/cco/
+* Office 365 portal 
+http://portal.office.com
+* Outlook 
+http://outlook.office.com
+* PF_Digital-Technology
+https://cancercareontario4.sharepoint.com/sites/928f77d70/ 
+
+
 ## fix step function time out
 ```typescript
 import {setDefaultTimeout} from 'cucumber';

@@ -1,8 +1,6 @@
 import { Builder, By, until, WebDriver } from 'selenium-webdriver';
-import { user } from "../models/user";
-import { browser } from "../lib/browser";
-import { Page } from '../lib/page';
-
+import { user } from "../models";
+import { browser, Page } from "../lib";
 
 
 export class loginPage extends Page {

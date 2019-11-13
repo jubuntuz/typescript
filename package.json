@@ -11,7 +11,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "application": "http://localhost/orrs.web",
+  "application": "https://localhost/orrs.web",
+  "test": {
+    "browser": "chrome",
+    "domain": "ccodsqa",
+    "user": "junhong.zhang",
+    "password": "G0dkn0ws!123",
+    "data": "./data/"
+  },
   "devDependencies": {
     "@types/body-parser": "^1.17.1",
     "@types/chai": "^4.2.2",

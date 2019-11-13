@@ -38,9 +38,8 @@ export class Page {
 
     select = (by: By, value: string) => //select by option value
         this.find(by)
-            .then(parent => parent.findElement(By.css("option[value='" + value + "']")).click());
-
-
+            .then(async parent => await parent.findElement(By.css("option[value='" + value + "']")).click());
+        
     click = (by: By) =>
         this.find(by).then(element => element.click());
 
@@ -94,10 +93,10 @@ export class Page {
         this.type(locator.day, date.getDay().toString());
     }
 
-    setLocationOfHospital = (locator: { hospital: By, location: By }, visit: { hospital: string, location: string }) => {
+    setLocationOfHospital = (locator: { hospital: By, location: By }, visit: { hospital: string, location: string }) => 
         this.select(locator.hospital, visit.hospital)
             .then(() => this.selectInGrp(locator.location, visit.location));
-    }
+    
 
     setName = (locator: { firstname: By, lastname: By }, name: { firstname: string, lastname: string }) => {
         this.type(locator.firstname, name.firstname);

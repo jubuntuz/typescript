@@ -1,0 +1,19 @@
+{
+    "basic": {
+        "hospital": "WRH",
+        "location": "WHD",
+        "lastname": "Automation",
+        "firstname": "Basic",
+        "bod": "20-05-2019",
+        "gender": "M",
+        "race": "3",
+        "street": "Holywood street",
+        "addrProvince": "ON",
+        "postalcode": "A1B2C3",
+        "responsibilityForPayment": "01",
+        "hcnNotAvailable": false,
+        "hcnNo": "3586655478",
+        "hcnProvince": "Ontario",
+        "date": null
+    }
+}
