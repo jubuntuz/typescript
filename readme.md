@@ -70,7 +70,11 @@ module.exports = {
   // ...
 }
 ```
-
+```typescript
+    console.log(new Date("2019-05-19"));
+    console.log(new Date().toLocaleDateString());
+    process.exit();
+    ```
 ## docs
 * typescript
 https://www.typescriptlang.org/docs/home.html
@@ -188,3 +192,5 @@ Feature: ORRS smoke test
       | "WHD"    | "281,291"         |
       | "SPHD"   | "040,442,443,444,050,452,453,454" |
    
+   
+

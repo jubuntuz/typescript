@@ -1,23 +1,26 @@
 import { TableDefinition, Given, When, Then, setDefaultTimeout } from 'cucumber';
 var expect = require("chai").expect;
-import { browser } from './../lib/browser';
+import { browser } from '../lib/browser';
 import { user, Registration } from '../models';
 import { loginPage, registrationPage, censusPage } from './../pages';
+const { log } = require("util");
 
-let page = require("./../pages").page;
+let page = require("../pages").page;
 
 setDefaultTimeout(500 * 1000);
 
 Given('I launch ORRS as a user:', async (dataTable: TableDefinition) => {
-     Object.assign(user, dataTable.hashes()[0]);
-     await new browser().tearup();
-     await new loginPage().login();
-    
+    Object.assign(user, dataTable.hashes()[0]);
+    await new browser().tearup();
+    await new loginPage().login();
 });
 
-When('I register a Pregnancy patient at {string}', async (location: string, dataTable: TableDefinition) => {
+When('I register a Pregnancy patient at {string}, {string}', async (hospital: string, location: string, dataTable: TableDefinition) => {
     page = await new registrationPage().launch("Pregnancy");
     let reg = new Registration().basic(dataTable.hashes()[0]);
+    reg.location = location;
+    reg.hospital = hospital;
+    log(`register Pregnancy patient ${reg}`);
     await page.register(reg);
 });
 

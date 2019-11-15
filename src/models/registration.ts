@@ -1,12 +1,11 @@
-import { blank } from ".";
-import { read } from "./../lib";
+import { read, toDate } from "./../lib";
 
 export class Registration {
     hospital!: string;
     location!: string;
     lastname!: string;
     firstname!: string;
-    bod!: Date;
+    dob!: Date;
     gender!: string;
     race!: string;
     street!: string;
@@ -20,13 +19,9 @@ export class Registration {
 
     basic = (reg: object) => {
         let def = Object.assign(this as Registration, read("registration").basic, reg);
-        console.log(def);
-        def.date = (def.date === undefined || def.date === "") ? new Date() : new Date(def.date);
+        def.date = toDate(def.date);
+        def.dob = toDate(def.dob);
         def.hcnNotAvailable = JSON.parse(def.hcnNotAvailable);
-        console.log(def);
-        console.log(`${typeof (def.date)}, ${typeof (def.hcnNotAvailable)}`);
-        
-        process.exit();
         return def;
     }
 

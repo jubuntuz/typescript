@@ -5,4 +5,6 @@ export const read = (filename: string) => {
     return JSON.parse(contents);
 }
 
+export const toDate = (date: string) =>
+    date === null ? new Date() : (date === "") ? date : new Date(date);
 

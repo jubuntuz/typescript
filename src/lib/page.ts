@@ -1,6 +1,7 @@
 import { By, until, WebElement, WebDriver } from 'selenium-webdriver';
 import { browser } from "./browser";
 import 'reflect-metadata';
+import { DH_CHECK_P_NOT_SAFE_PRIME } from 'constants';
 
 let timeout = 50 * 1000;
 
@@ -9,10 +10,12 @@ export class Page {
     title = () => browser.driver.getTitle();
 
     //wait
-
     waitTextPresent = (by: By, content: string) =>
         this.find(by)
-            .then(async (element) => await browser.driver.wait(until.elementTextContains(element, content), timeout));
+            .then((element) => browser.driver.wait(until.elementTextContains(element, content), timeout));
+
+    waitPresent = (by: By) =>
+        browser.driver.wait(until.elementLocated(by), timeout);
 
 
     waitTitlePresent = (title: string) =>
@@ -34,21 +37,21 @@ export class Page {
     selectInGrp = (by: By, value: string) => //select with optgroup - by option value
         this.find(by)
             .then(parent => parent.findElement(By.css("optgroup option[value='" + value + "']")).click())
-            .then(() => this.sleep(1));
 
     select = (by: By, value: string) => //select by option value
         this.find(by)
-            .then(async parent => await parent.findElement(By.css("option[value='" + value + "']")).click());
-        
+            .then(parent => parent.findElement(By.css("option[value='" + value + "']")).click())
+
     click = (by: By) =>
         this.find(by).then(element => element.click());
 
-    async check(by: By, toBeChecked: boolean) {
-        let element = await this.find(by);
-        if (await element.isSelected() !== toBeChecked) {
-            await this.click(by);
-        }
-    }
+    check = (by: By, toBeChecked: boolean) =>
+        this.find(by)
+            .then(async (element) => {
+                if (await element.isSelected() !== toBeChecked) {
+                    this.click(by);
+                }
+            });
 
 
     //get
@@ -57,14 +60,16 @@ export class Page {
             .then(element => element.getAttribute(attr));
 
 
-    getOptions = async (by: By) => {
-        let elements = await this.find(by)
-            .then(async (dropbox) => dropbox.findElements(By.css("option")));
-        if (browser.browserName === "internet explorer" || browser.browserName === "ie") {
-            return await elements[0].getAttribute("value");
-        } else {
-            return await Promise.all(elements.map(async (element) => await element.getAttribute("value")));
-        }
+    getOptions = (by: By) => {
+        this.find(by)
+            .then(dropbox => dropbox.findElements(By.css("option")))
+            .then(async elements => {
+                if (browser.browserName === "internet explorer" || browser.browserName === "ie") {
+                    return Promise.resolve(elements[0].getAttribute("value"));
+                } else {
+                    return Promise.all(elements.map(element => element.getAttribute("value")));
+                }
+            });
     }
 
     getText = (by: By) =>
@@ -77,7 +82,7 @@ export class Page {
 
     isDisplayed = (by: By) =>
         this.find(by)
-            .then(async (element: WebElement) => await element.isDisplayed());
+            .then((element) => element.isDisplayed());
 
     isDisabled = (by: By) =>
         this.find(by)
@@ -88,15 +93,16 @@ export class Page {
 
     //orrs
     setDate = (locator: { year: By, month: By, day: By }, date: Date) => {
-        this.type(locator.year, date.getFullYear().toString());
-        this.select(locator.month, date.getMonth().toString());
-        this.type(locator.day, date.getDay().toString());
+        this.type(locator.year, date.getUTCFullYear().toString());
+        this.select(locator.month, (date.getUTCMonth() + 1).toString());
+        this.type(locator.day, date.getUTCDate().toString());
     }
 
-    setLocationOfHospital = (locator: { hospital: By, location: By }, visit: { hospital: string, location: string }) => 
-        this.select(locator.hospital, visit.hospital)
-            .then(() => this.selectInGrp(locator.location, visit.location));
-    
+    setLocationOfHospital = async (locator: { hospital: By, location: By }, visit: { hospital: string, location: string }) => {
+        await this.select(locator.hospital, visit.hospital);
+        await this.sleep(1);
+        await this.selectInGrp(locator.location, visit.location);
+    }
 
     setName = (locator: { firstname: By, lastname: By }, name: { firstname: string, lastname: string }) => {
         this.type(locator.firstname, name.firstname);

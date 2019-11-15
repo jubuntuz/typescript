@@ -1,6 +1,7 @@
 import { Builder, By, until, WebElement } from 'selenium-webdriver';
 import { Page, findBy } from '../lib/page';
 import { Registration } from "../models";
+import { RSA_SSLV23_PADDING } from 'constants';
 
 export class registrationPage extends Page {
 
@@ -30,7 +31,7 @@ export class registrationPage extends Page {
             firstname: By.id("MainContent_txtFirstName")
         },
 
-        bod: {
+        dob: {
             day: By.id("MainContent_dtDOB_txtDay"),
             month: By.id("MainContent_dtDOB_ddlMonth"),
             year: By.id("MainContent_dtDOB_txtYear")
@@ -44,39 +45,56 @@ export class registrationPage extends Page {
             street: By.id("MainContent_tbStreetAddress1"),
             province: By.id("MainContent_ddlProvince"),//selectbox
             postalcode: By.id("MainContent_txtPostalCode")
-
         },
-
         submitBtn: By.id("MainContent_btnFinish")//button
+
     }
 
-    matchContinueBtnId = "MainContent_PatientMatch_btnContinue";
-    confirmRegBtnId = "MainContent_lblPatientIDTop";
+    msgbox = {
+        matchContinueBtn: By.id("MainContent_PatientMatch_btnContinue"),
+        confirmRegBtn: By.id("MainContent_confirm_btnYes")
+    }
 
-    patientId = "MainContent_lblPatientIDTop";
+    patientId = By.id("MainContent_lblPatientIDTop");
 
     register = async (reg: Registration) => {
-        this.setLocationOfHospital(this.form.owner, reg);
-        this.setDate(this.form.date, reg.bod);
+        await this.fillup(reg);
+        return await this.submit();
+    }
+
+    fillup = async (reg: Registration) => {
+        await this.setLocationOfHospital(this.form.owner, reg);
+        await this.sleep(1);
+        this.setGender(this.form.gender, reg.gender);
+        this.setRace(this.form.race, reg.race);
+
+        this.setDate(this.form.date, reg.date);
+        this.setDate(this.form.dob, reg.dob);
         this.setName(this.form.name, reg);
         this.setAddress(this.form.address, reg);
         this.setPayment(this.form.responsibilityForPayment, reg.responsibilityForPayment);
-        this.setGender(this.form.gender, reg.gender);
-        this.setRace(this.form.gender, reg.race);
         this.setHcn(this.form.hcn, reg);
+        await this.sleep(2);
+    }
+
+    submit = async () => {
+        await this.waitPresent(this.form.submitBtn);
         await this.click(this.form.submitBtn);
 
+        await this.sleep(1);
         //warning if patient exists
-        if (await this.isFound(By.id(this.matchContinueBtnId))) {
-            await this.click(By.id(this.matchContinueBtnId));
+        if (await this.isFound(this.msgbox.matchContinueBtn)) {
+            await this.click(this.msgbox.matchContinueBtn);
         }
-        //confirm registration 
-        await this.click(By.id(this.confirmRegBtnId));
-        return await this.getPatientId;
+        //confirm registration
+        await this.waitPresent(this.msgbox.confirmRegBtn);
+        await this.click(this.msgbox.confirmRegBtn);
+
+        return this.getPatientId;
     }
 
 
-    getPatientId = () => this.getText(By.id(this.patientId));
+    getPatientId = () => this.getText(this.patientId);
 
     launch = async (registerType: string) => {
         await this.click(By.linkText("Registration"));

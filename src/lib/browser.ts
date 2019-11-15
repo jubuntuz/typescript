@@ -15,7 +15,7 @@ export class browser {
 
     async tearup() {
         let url = pkg.application;
-        console.log(`launching ${url}`);
+       
         if (browser.browserName === "internet explorer" || browser.browserName == "ie") {
             /*let cap = webdriver.Capabilities.ie(); //not working
             cap.set("ignoreProtectedModeSettings", true);
