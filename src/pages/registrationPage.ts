@@ -1,7 +1,8 @@
 import { Builder, By, until, WebElement } from 'selenium-webdriver';
 import { Page, findBy } from '../lib/page';
 import { Registration } from "../models";
-import { RSA_SSLV23_PADDING } from 'constants';
+
+
 
 export class registrationPage extends Page {
 
@@ -59,12 +60,15 @@ export class registrationPage extends Page {
 
     register = async (reg: Registration) => {
         await this.fillup(reg);
-        return await this.submit();
+        await this.submit();
+        return await this.getPatientId;
     }
 
     fillup = async (reg: Registration) => {
+        console.log(reg);
         await this.setLocationOfHospital(this.form.owner, reg);
         await this.sleep(1);
+        //await this.waitLocated(this.form.gender);
         this.setGender(this.form.gender, reg.gender);
         this.setRace(this.form.race, reg.race);
 
@@ -78,23 +82,21 @@ export class registrationPage extends Page {
     }
 
     submit = async () => {
-        await this.waitPresent(this.form.submitBtn);
+        await this.waitLocated(this.form.submitBtn, 5 * 1000);
         await this.click(this.form.submitBtn);
-
         await this.sleep(1);
         //warning if patient exists
         if (await this.isFound(this.msgbox.matchContinueBtn)) {
             await this.click(this.msgbox.matchContinueBtn);
         }
         //confirm registration
-        await this.waitPresent(this.msgbox.confirmRegBtn);
+        await this.waitLocated(this.msgbox.confirmRegBtn);
         await this.click(this.msgbox.confirmRegBtn);
-
-        return this.getPatientId;
+        await this.sleep(1);
     }
 
 
-    getPatientId = () => this.getText(this.patientId);
+    getPatientId = async () => await this.getText(this.patientId);
 
     launch = async (registerType: string) => {
         await this.click(By.linkText("Registration"));

@@ -194,3 +194,27 @@ Feature: ORRS smoke test
    
    
 
+ @registration
+  Scenario Outline: As a user, I should be able to register a patient
+    When I register a Pregnancy patient at "<hospital>", "<location>"
+      | hcnNotAvailable | 
+      | true            |     
+    Then I should see patientId in the page
+    Examples:
+      | hospital | location |
+      | WRH      | DMA      |
+      | WRH | SPHD |
+
+      | "SPHD"   | "040,442,443,444,050,452,453,454" |
+
+
+      getOptions = async (by: By) => {
+        let elements = await this.find(by)
+            .then(async (dropbox) => await dropbox.findElements(By.css("option")));
+
+        if (browser.browserName === "internet explorer" || browser.browserName === "ie") {
+            return await elements[0].getAttribute("value");
+        } else {
+            return await Promise.all(elements.map(async (element) => await element.getAttribute("value")));
+        }
+    }

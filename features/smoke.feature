@@ -5,16 +5,7 @@ Feature: ORRS smoke test
     Given I launch ORRS as a user:
       |  |
 
-  @registration
-  Scenario Outline: As a user, I should be able to register a patient
-    When I register a Pregnancy patient at "<hospital>", "<location>"
-      | hcnNotAvailable | 
-      | true            |     
-    Then I should see patientId in the page
-    Examples:
-      | hospital | location |
-      | WRH      | DMA      |
-      | WRH | SPHD |
+ 
 
 
   @treatment
@@ -26,4 +17,4 @@ Feature: ORRS smoke test
     Examples:
       | location | invalidModalities                 |
       | "DMA"    | "281,291"                         |
-      | "SPHD"   | "040,442,443,444,050,452,453,454" |
+      

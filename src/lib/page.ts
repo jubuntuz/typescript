@@ -1,9 +1,9 @@
 import { By, until, WebElement, WebDriver } from 'selenium-webdriver';
 import { browser } from "./browser";
 import 'reflect-metadata';
-import { DH_CHECK_P_NOT_SAFE_PRIME } from 'constants';
 
-let timeout = 50 * 1000;
+
+let timeout = 120 * 1000;
 
 export class Page {
 
@@ -14,9 +14,30 @@ export class Page {
         this.find(by)
             .then((element) => browser.driver.wait(until.elementTextContains(element, content), timeout));
 
-    waitPresent = (by: By) =>
-        browser.driver.wait(until.elementLocated(by), timeout);
+    waitLocated = (by: By, timeOut: number = timeout) =>
+        browser.driver.wait(until.elementLocated(by), timeOut);
 
+    /* wait = setInterval(function () {
+         if (await element.getAttribute("style") !== "display: none") {
+             // Communicate what you were trying to return using globals
+             clearInterval(wait);
+         }
+         if (new Date() - timeWas > 3000) { // Timeout
+             // Clear this interval
+             clearInterval(wait);
+         }
+     }, 30);
+ 
+     waitVisible = (by: By, timeOut: number = timeout) =>
+         this.find(by)
+             .then(async element => Promise.race(setTimeout(resolve, timeout))
+             {
+                 while (await element.getAttribute("style") === "display: none") {
+                     
+                 };
+             });*/
+    /*    this.find(by)
+        .then(element => browser.driver.wait(until.elementIsVisible(element), timeOut));*/
 
     waitTitlePresent = (title: string) =>
         browser.driver.wait(until.titleIs(title), timeout);
@@ -27,7 +48,7 @@ export class Page {
 
     // mouse behavior
     find = (by: By) =>
-        browser.driver.wait(until.elementLocated(by), timeout)
+        this.waitLocated(by)
             .then(() => browser.driver.findElement(by));
 
     type = (by: By, text: string) =>
@@ -47,12 +68,10 @@ export class Page {
 
     check = (by: By, toBeChecked: boolean) =>
         this.find(by)
-            .then(async (element) => {
-                if (await element.isSelected() !== toBeChecked) {
-                    this.click(by);
-                }
+            .then(async element => {
+                if (await element.isSelected() !== toBeChecked)
+                    element.click();
             });
-
 
     //get
     getAttrById = (id: string, attr: string) =>
@@ -60,7 +79,7 @@ export class Page {
             .then(element => element.getAttribute(attr));
 
 
-    getOptions = (by: By) => {
+    getOptions = async (by: By) =>
         this.find(by)
             .then(dropbox => dropbox.findElements(By.css("option")))
             .then(async elements => {
@@ -70,11 +89,11 @@ export class Page {
                     return Promise.all(elements.map(element => element.getAttribute("value")));
                 }
             });
-    }
 
     getText = (by: By) =>
         this.find(by)
-            .then((element) => element.getText());
+            .then(async (element) => await browser.driver.wait(until.elementIsVisible(element), timeout))
+            .then(async (element) => await element.getText());
 
     //bool - is
     isFound = (by: By) =>
@@ -125,8 +144,8 @@ export class Page {
         this.type(locator, responsibilityForPayment);
 
 
-    setHcn = (locator: { notAvailable: By, hcnNo: By, province: By }, hcn: { hcnNotAvailable: boolean, hcnProvince: string, hcnNo: string }) => {
-        this.check(locator.notAvailable, hcn.hcnNotAvailable);
+    setHcn = async (locator: { notAvailable: By, hcnNo: By, province: By }, hcn: { hcnNotAvailable: boolean, hcnProvince: string, hcnNo: string }) => {
+        await this.check(locator.notAvailable, hcn.hcnNotAvailable);
         if (!hcn.hcnNotAvailable) {
             this.type(locator.hcnNo, hcn.hcnNo);
             this.select(locator.province, hcn.hcnProvince);

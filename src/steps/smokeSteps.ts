@@ -3,9 +3,9 @@ var expect = require("chai").expect;
 import { browser } from '../lib/browser';
 import { user, Registration } from '../models';
 import { loginPage, registrationPage, censusPage } from './../pages';
-const { log } = require("util");
 
 let page = require("../pages").page;
+let patientId!: string;
 
 setDefaultTimeout(500 * 1000);
 
@@ -20,12 +20,14 @@ When('I register a Pregnancy patient at {string}, {string}', async (hospital: st
     let reg = new Registration().basic(dataTable.hashes()[0]);
     reg.location = location;
     reg.hospital = hospital;
-    log(`register Pregnancy patient ${reg}`);
-    await page.register(reg);
+    patientId = await page.register(reg);
+    console.log(`patientId: ${patientId}`);
+    console.log(patientId);
 });
 
 Then('I should see patientId in the page', function () {
-    expect.ok;
+    console.log(`patientId: ${patientId}`);
+    expect(patientId).to.not.null;
 });
 
 Given('I have a patient in manage Census page at {string}', async (location: string) => {
@@ -39,7 +41,6 @@ When('I add {string} treatment', async (treatment: string) =>
 
 Then('I should not see any of {string} in Modality dropdown list', async (invalidModality: string) => {
     var invalid = invalidModality.split(',');
-    console.log("invalid:" + invalid);
     //get modalities from dropdown list
     var modalities = await page.getModalityOptions();
     console.log(`dropdown list: ${modalities}`);
@@ -50,6 +51,7 @@ Then('I should not see any of {string} in Modality dropdown list', async (invali
 Then('I should see an error {string} while input any of {string} in Modality code', async (error: string, invalid: string) => {
     let invalids = invalid.split(',');
     //let errors = await Promise.all(invalids.map(async (mod) => await page.modality(mod)));
-    let err = await page.modality(invalids[0]);
+    let err = await page.setModality(invalids[0]);
+    console.log(err);
     await expect(err).to.be.equal(error);
 }); 

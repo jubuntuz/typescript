@@ -1,6 +1,7 @@
 const webdriver = require('selenium-webdriver');
 import { WebDriver, Capabilities, By } from 'selenium-webdriver';
 const pkg = require('./../../package.json');
+
 const chrome = require('chromedriver').path;
 const ie = require('iedriver').path;
 
