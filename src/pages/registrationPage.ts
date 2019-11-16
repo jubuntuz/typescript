@@ -60,15 +60,16 @@ export class registrationPage extends Page {
 
     register = async (reg: Registration) => {
         await this.fillup(reg);
+        await this.sleep(2);
         await this.submit();
-        return await this.getPatientId;
+        await this.getPatientId();
     }
+
 
     fillup = async (reg: Registration) => {
         console.log(reg);
         await this.setLocationOfHospital(this.form.owner, reg);
         await this.sleep(1);
-        //await this.waitLocated(this.form.gender);
         this.setGender(this.form.gender, reg.gender);
         this.setRace(this.form.race, reg.race);
 
@@ -77,26 +78,24 @@ export class registrationPage extends Page {
         this.setName(this.form.name, reg);
         this.setAddress(this.form.address, reg);
         this.setPayment(this.form.responsibilityForPayment, reg.responsibilityForPayment);
-        this.setHcn(this.form.hcn, reg);
-        await this.sleep(2);
+        await this.setHcn(this.form.hcn, reg);
     }
 
     submit = async () => {
         await this.waitLocated(this.form.submitBtn, 5 * 1000);
         await this.click(this.form.submitBtn);
-        await this.sleep(1);
-        //warning if patient exists
+        await this.sleep(1)
+        await this.waitLocated(this.msgbox.matchContinueBtn, 5 * 1000);
         if (await this.isFound(this.msgbox.matchContinueBtn)) {
-            await this.click(this.msgbox.matchContinueBtn);
+            this.click(this.msgbox.matchContinueBtn);
         }
-        //confirm registration
-        await this.waitLocated(this.msgbox.confirmRegBtn);
+        await this.waitLocated(this.msgbox.confirmRegBtn, 5 * 1000);
         await this.click(this.msgbox.confirmRegBtn);
         await this.sleep(1);
     }
 
 
-    getPatientId = async () => await this.getText(this.patientId);
+    getPatientId = () => this.getText(this.patientId);
 
     launch = async (registerType: string) => {
         await this.click(By.linkText("Registration"));

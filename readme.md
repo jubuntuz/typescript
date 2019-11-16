@@ -205,7 +205,7 @@ Feature: ORRS smoke test
       | WRH      | DMA      |
       | WRH | SPHD |
 
-      | "SPHD"   | "040,442,443,444,050,452,453,454" |
+     
 
 
       getOptions = async (by: By) => {

@@ -35,15 +35,16 @@ export class censusPage extends Page {
 
         await this.waitLocated(locator.modality);
         await this.type(locator.modality, modality + "\n");
-        await this.waitVisible(locator.errorbox, timeout);
-        console.log(await browser.driver.findElement(locator.errorbox).isDisplayed());
+        await this.sleep(10);
+        /*console.log(await browser.driver.findElement(locator.errorbox).isDisplayed());
         console.log(await browser.driver.findElement(locator.errorbox).getAttribute("style"));
-
+*/
         return await this.getText(locator.errorbox);
     }
 
     //lauch to patient list page
     async launch(location: string, tab: string = "Manage Census", period: string = "") {
+
         if (tab.toLowerCase() !== "manage census" && tab.toLowerCase() !== "manage period") return false;
         await this.click(By.linkText("Census"));
         await this.click(By.linkText(tab));

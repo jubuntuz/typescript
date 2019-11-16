@@ -37,6 +37,7 @@ Given('I have a patient in manage Census page at {string}', async (location: str
 
 When('I add {string} treatment', async (treatment: string) =>
     await page.addTreatment(treatment)
+    
 );
 
 Then('I should not see any of {string} in Modality dropdown list', async (invalidModality: string) => {

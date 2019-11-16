@@ -5,7 +5,7 @@ import { browser, Page } from "../lib";
 
 export class loginPage extends Page {
     login = (async () => {
-        if (browser.browserName === "internet explorer") {
+        if (browser.browserName === "internet explorer" || browser.browserName === "ie") {
             await this.waitTitlePresent("This site isn’t secure");
             await this.click(By.id("infoBlockIDImage"));
             await this.click(By.id("overridelink"));
