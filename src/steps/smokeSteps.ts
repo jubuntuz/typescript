@@ -21,8 +21,6 @@ When('I register a Pregnancy patient at {string}, {string}', async (hospital: st
     reg.location = location;
     reg.hospital = hospital;
     patientId = await page.register(reg);
-    console.log(`patientId: ${patientId}`);
-    console.log(patientId);
 });
 
 Then('I should see patientId in the page', function () {
@@ -37,7 +35,7 @@ Given('I have a patient in manage Census page at {string}', async (location: str
 
 When('I add {string} treatment', async (treatment: string) =>
     await page.addTreatment(treatment)
-    
+
 );
 
 Then('I should not see any of {string} in Modality dropdown list', async (invalidModality: string) => {
