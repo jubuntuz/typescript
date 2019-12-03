@@ -1,0 +1,31 @@
+Feature: Bundle Report - GN eligiblity Upon receiving GN treatment
+    Background: set global date as first day of previous fiscal year and location as "JHH"
+    Scenario Outline: receiving GN and MCKC acrossing different quaters
+        Given Patient registered MCKC in "Q1" at "JHH"
+        When Patient has 1 VG with each aculty level in "Q1"
+            And Patient is transfered <transferType> to <newLocation> in <quaterForVG>
+            And Patient has 2 VG with each aculty level in "Q1"
+            And Patient has VR in <quaterForVR>
+        Then I should see <bundles><unbundles><Exclusionreason> in bundle report at <newLocation>
+        Examples:
+            | transferType | newLocation | quaterForVG | quaterForVR | bundles | unbundles                                                                                          |
+            | TR           | SBK         | Q1          | Q2          | A       | {"SOS": [{"GN4":2}]}                                                                               |
+            | L            | SOS         | Q1          | Q2          | A       | {"SOS":[{"GN4":2}],"JHH":[{"GN1":1},{"GN2":1},{"GN3":1},{"GN4":1}]}                                |
+            | L            | SOS         | Q1          | Q3          | A       | {"SOS":[{"GN1":2},{"GN2":2},{"GN3":2},{"GN4":2}]}, JHH":[{"GN1":1},{"GN2":1},{"GN3":1},{"GN4":1}]} |
+            | L            | SOS         | Q2          | Q1          | A       | {"SOS":[{"GN4":2}]}, JHH":[{"GN1":1},{"GN2":1},{"GN3":1},{"GN4":1}]}                               |
+
+    Scenario Outline: receiving GN and MCKC acrossing different quaters
+        Given Patient registered MCKC in "Q1" at "JHH"
+        When Patient has 1 VG with each aculty level in "Q1"
+            And Patient is transfered <transferType> to <newLocation> in <quaterForVG>
+            And Patient has 2 VG with each aculty level in "Q1"
+            And Patient has VR in <quaterForVR>
+        Then I should see <GN1To3Eligibility> in bundle report at <newLocation>
+
+        Examples:
+            | transferType | newLocation | quaterForVG | quaterForVR | GN1To3Eligibility | Exclusionreason        |
+            | TR           | SBK         | Q1          | Q2          | Not               | within an MCKC bundle. |
+            | L            | SOS         | Q1          | Q2          | Not               | within an MCKC bundle. |
+            | L            | SOS         | Q1          | Q3          | Yes               |                        |
+            | L            | SOS         | Q2          | Q1          | Not               | within an MCKC bundle. |
+
