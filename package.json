@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/cucumber-js -p default --format json:./reports/json/report.json",
-    "glue": "cucumber-js features/ -r ./src/steps/*.ts  --format json:./reports/json/report.json",
+    "glue": "cucumber-js features/ -r ./src/steps/*.ts",
     "report": "node src/reporting/richreport.ts & node src/reporting/reporting.ts"
   },
   "keywords": [],

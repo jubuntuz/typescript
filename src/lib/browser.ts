@@ -5,7 +5,6 @@ const pkg = require('./../../package.json');
 const chrome = require('chromedriver').path;
 const ie = require('iedriver').path;
 
-
 export class browser {
     static driver: WebDriver;
     static browserName: string;
@@ -16,12 +15,13 @@ export class browser {
 
     async tearup() {
         let url = pkg.application;
-       
+
         if (browser.browserName === "internet explorer" || browser.browserName == "ie") {
-            /*let cap = webdriver.Capabilities.ie(); //not working
+            let cap = webdriver.Capabilities.ie();
             cap.set("ignoreProtectedModeSettings", true);
             cap.set("ignoreZoomSetting", true);
-            cap.set("nativeEvents", true);*/
+            cap.set("nativeEvents", false);
+            console.log(ie);
             browser.driver = await new webdriver.Builder(ie)
                 .forBrowser("internet explorer")
                 .withCapabilities(Capabilities.ie())

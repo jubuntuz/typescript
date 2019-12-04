@@ -15,7 +15,9 @@ export class Page {
             .then((element) => browser.driver.wait(until.elementTextContains(element, content), timeout));
 
     waitLocated = (by: By, timeOut: number = timeout) =>
-        browser.driver.wait(until.elementLocated(by), timeOut);
+        Promise.resolve(browser.driver.wait(until.elementLocated(by), timeOut));
+
+
 
     /* wait = setInterval(function () {
          if (await element.getAttribute("style") !== "display: none") {
@@ -96,8 +98,13 @@ export class Page {
             .then(async (element) => await element.getText());
 
     //bool - is
-    isFound = (by: By) =>
-        browser.driver.findElements(by).then(found => found.length != 0);
+    isFound = async (by: By) => {
+        let found = await browser.driver.findElements(by);
+        //console.log(found.length);
+        return found.length == 1;
+
+    }
+
 
     isDisplayed = (by: By) =>
         this.find(by)
@@ -121,6 +128,7 @@ export class Page {
         await this.select(locator.hospital, visit.hospital);
         await this.sleep(1);
         await this.selectInGrp(locator.location, visit.location);
+
     }
 
     setName = (locator: { firstname: By, lastname: By }, name: { firstname: string, lastname: string }) => {
@@ -146,9 +154,10 @@ export class Page {
 
     setHcn = async (locator: { notAvailable: By, hcnNo: By, province: By }, hcn: { hcnNotAvailable: boolean, hcnProvince: string, hcnNo: string }) => {
         await this.check(locator.notAvailable, hcn.hcnNotAvailable);
+        //await this.sleep(1);
         if (!hcn.hcnNotAvailable) {
-            this.type(locator.hcnNo, hcn.hcnNo);
-            this.select(locator.province, hcn.hcnProvince);
+            await this.type(locator.hcnNo, hcn.hcnNo);
+            await this.select(locator.province, hcn.hcnProvince);
         }
     }
 

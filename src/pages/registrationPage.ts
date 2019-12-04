@@ -59,7 +59,8 @@ export class registrationPage extends Page {
     patientId = By.id("MainContent_lblPatientIDTop");
 
     register = async (reg: Registration) => {
-        await this.fillup(reg);
+        await Promise.resolve(await this.fillup(reg));
+        await this.sleep(1);
         await this.submit();
         return await this.getPatientId();
     }
@@ -82,10 +83,9 @@ export class registrationPage extends Page {
     }
 
     submit = async () => {
-        await this.waitLocated(this.form.submitBtn, 5 * 1000);
+        await this.waitLocated(this.form.submitBtn, 10 * 1000);
         await this.click(this.form.submitBtn);
         await this.sleep(1);
-        //await this.waitLocated(this.msgbox.matchContinueBtn);
 
         if (await this.isFound(this.msgbox.matchContinueBtn)) {
             await this.click(this.msgbox.matchContinueBtn);
@@ -93,7 +93,7 @@ export class registrationPage extends Page {
         await this.sleep(1);
         await this.waitLocated(this.msgbox.confirmRegBtn);
         await this.click(this.msgbox.confirmRegBtn);
-        await this.sleep(1);
+
     }
 
 

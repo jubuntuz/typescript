@@ -35,7 +35,7 @@ export class censusPage extends Page {
 
         await this.waitLocated(locator.modality);
         await this.type(locator.modality, modality + "\n");
-        await this.sleep(10);
+        await this.sleep(15);
         /*console.log(await browser.driver.findElement(locator.errorbox).isDisplayed());
         console.log(await browser.driver.findElement(locator.errorbox).getAttribute("style"));
 */

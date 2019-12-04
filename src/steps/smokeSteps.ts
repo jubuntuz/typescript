@@ -17,15 +17,15 @@ Given('I launch ORRS as a user:', async (dataTable: TableDefinition) => {
 
 When('I register a Pregnancy patient at {string}, {string}', async (hospital: string, location: string, dataTable: TableDefinition) => {
     page = await new registrationPage().launch("Pregnancy");
-    let reg = new Registration().basic(dataTable.hashes()[0]);
+    let reg = await new Registration().basic(dataTable.hashes()[0]);
     reg.location = location;
     reg.hospital = hospital;
     patientId = await page.register(reg);
 });
 
-Then('I should see patientId in the page', function () {
+Then('I should see patientId in the page', async () => {
     console.log(`patientId: ${patientId}`);
-    expect(patientId).to.not.null;
+    await expect(patientId).to.not.null;
 });
 
 Given('I have a patient in manage Census page at {string}', async (location: string) => {
