@@ -118,10 +118,10 @@ export class Page {
         new Promise(resolve => setTimeout(resolve, seconds * 1000));
 
     //orrs
-    setDate = (locator: { year: By, month: By, day: By }, date: Date) => {
-        this.type(locator.year, date.getUTCFullYear().toString());
-        this.select(locator.month, (date.getUTCMonth() + 1).toString());
-        this.type(locator.day, date.getUTCDate().toString());
+    setDate = async (locator: { year: By, month: By, day: By }, date: Date) => {
+        await this.type(locator.year, date.getUTCFullYear().toString());
+        await this.select(locator.month, (date.getUTCMonth() + 1).toString());
+        await this.type(locator.day, date.getUTCDate().toString());
     }
 
     setLocationOfHospital = async (locator: { hospital: By, location: By }, visit: { hospital: string, location: string }) => {
@@ -131,15 +131,15 @@ export class Page {
 
     }
 
-    setName = (locator: { firstname: By, lastname: By }, name: { firstname: string, lastname: string }) => {
-        this.type(locator.firstname, name.firstname);
-        this.type(locator.lastname, name.lastname);
+    setName = async (locator: { firstname: By, lastname: By }, name: { firstname: string, lastname: string }) => {
+        await this.type(locator.firstname, name.firstname);
+        await this.type(locator.lastname, name.lastname);
     }
 
-    setAddress = (locator: { street: By, province: By, postalcode: By }, address: { street: string, addrProvince: string, postalcode: string }) => {
-        this.type(locator.street, address.street);
-        this.select(locator.province, address.addrProvince);
-        this.type(locator.postalcode, address.postalcode);
+    setAddress = async (locator: { street: By, province: By, postalcode: By }, address: { street: string, addrProvince: string, postalcode: string }) => {
+        await this.type(locator.street, address.street);
+        await this.select(locator.province, address.addrProvince);
+        await this.type(locator.postalcode, address.postalcode);
     }
 
     setRace = (locator: By, race: string) =>

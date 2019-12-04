@@ -72,14 +72,14 @@ export class registrationPage extends Page {
         await this.sleep(1);
         await this.setHcn(this.form.hcn, reg);
         await this.sleep(1);
-        this.setGender(this.form.gender, reg.gender);
-        this.setRace(this.form.race, reg.race);
+        await this.setGender(this.form.gender, reg.gender);
+        await this.setRace(this.form.race, reg.race);
 
-        this.setDate(this.form.date, reg.date);
-        this.setDate(this.form.dob, reg.dob);
-        this.setName(this.form.name, reg);
-        this.setAddress(this.form.address, reg);
-        this.setPayment(this.form.responsibilityForPayment, reg.responsibilityForPayment);
+        await this.setDate(this.form.date, reg.date);
+        await this.setDate(this.form.dob, reg.dob);
+        await this.setName(this.form.name, reg);
+        await this.setAddress(this.form.address, reg);
+        await this.setPayment(this.form.responsibilityForPayment, reg.responsibilityForPayment);
     }
 
     submit = async () => {

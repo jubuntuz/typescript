@@ -13,7 +13,7 @@
   "license": "ISC",
   "application": "https://localhost/orrs.web",
   "test": {
-    "browser": "chrome",
+    "browser": "ie",
     "domain": "ccodsqa",
     "user": "junhong.zhang",
     "password": "G0dkn0ws!123",
