@@ -16,9 +16,14 @@ npm update
 npm outdated
 ```
 
-## fix ie driver not working
+## fix ie & performence
 window display size = 100%
 internet option - security - protected mode: enable or disable for all zones
+using ieServerDrive32.exe instead of 64bit
+
+```javascript
+cap.set("nativeEvents", false);
+```
 
 ## url
 * TFS - ORN
@@ -154,67 +159,3 @@ When working with NodeJs, your tsconfig.json should look like this:
         "sourceMap": true
    }
 }
-```
-
-
-   ```cucumber
- 
-
-@smoke
-Feature: ORRS smoke test
-
-  Scenario:login
-    Given I launch ORRS as a user:
-      | username      | password |
-      | junhong.zhang |          |
-
- 
-   @registration
-  Scenario Outline: As a user, I should be able to register a patient
-    When I register a Pregnancy patient at <location>
-      |  |
-      |  |
-    Then I should see patientId in the page
-    Examples:
-      | location |
-      | "DMA"    |
-      | "SPHD"   |
-
-
-  @treatment
-  Scenario Outline: As a user, I should not add any treatment having invalid modality for its location
-    Given I have a patient in manage Census page at <location>
-    When I add "M" treatment
-    Then I should not see any of <invalidModalities> in Modality dropdown list
-      And I should see an error while input any of <invalidModalities> in Modality code
-    Examples:
-      | location | invalidModalities |
-      | "WHD"    | "281,291"         |
-      | "SPHD"   | "040,442,443,444,050,452,453,454" |
-   
-   
-
- @registration
-  Scenario Outline: As a user, I should be able to register a patient
-    When I register a Pregnancy patient at "<hospital>", "<location>"
-      | hcnNotAvailable | 
-      | true            |     
-    Then I should see patientId in the page
-    Examples:
-      | hospital | location |
-      | WRH      | DMA      |
-      | WRH | SPHD |
-
-     
-
-
-      getOptions = async (by: By) => {
-        let elements = await this.find(by)
-            .then(async (dropbox) => await dropbox.findElements(By.css("option")));
-
-        if (browser.browserName === "internet explorer" || browser.browserName === "ie") {
-            return await elements[0].getAttribute("value");
-        } else {
-            return await Promise.all(elements.map(async (element) => await element.getAttribute("value")));
-        }
-    }
