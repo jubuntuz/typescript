@@ -5,7 +5,6 @@ Feature: ORRS smoke test
     Given I launch ORRS as a user:
       |  |
 
-
   @registration
   Scenario Outline: As a user, I should be able to register a patient
     When I register a Pregnancy patient at "<hospital>", "<location>"

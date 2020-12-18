@@ -16,7 +16,7 @@ npm update
 npm outdated
 ```
 
-## fix ie & performence
+## fix IE not working properly & performence
 window display size = 100%
 internet option - security - protected mode: enable or disable for all zones
 using ieServerDrive32.exe instead of 64bit
@@ -28,22 +28,30 @@ cap.set("nativeEvents", false);
 ## url
 * TFS - ORN
 https://tfs.cancercare.on.ca/tfs/CCO 
+
 * ORRS - QA
 https://qaorrs.renalnetwork.on.ca/orrs
-* ORRS
+
+* ORRS - local
 https://localhost/orrs.web
 
 * workday
 https://wd3.myworkday.com/cco/
+
 * Office 365 portal 
 http://portal.office.com
+
 * Outlook 
 http://outlook.office.com
+
 * PF_Digital-Technology
 https://cancercareontario4.sharepoint.com/sites/928f77d70/ 
 
 
-## fix step function time out
+# Database
+  >server name: `ORNTRN1ORDBS2`
+
+## fix step definition time out
 ```typescript
 import {setDefaultTimeout} from 'cucumber';
 setDefaultTimeout(50 * 1000);
