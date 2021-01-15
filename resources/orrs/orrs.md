@@ -13,6 +13,13 @@ user: orrsdbuser
 password: qwerty123456!
 DB: [ORRSDB_DEV1_AZURE]
 
+
+## DB for  https://orrs-web2.azurewebsites.net/  
+Server=tcp:orntrn1.database.windows.net,1433;Initial Catalog=ORRSDB_DEV2_AZ;Persist Security Info=False;User ID=orrsdbuser;Password=qwerty123456!;
+
+## swagger
+https://localhost:5001/swagger/index.html
+
 ## local
 server name: ORNTRN1ORDBS2
 authentication: Window Authentication
@@ -43,6 +50,7 @@ true restful API
     
 no problem we can have a discussion on Monday. Because we substituted WCF with Web Api, there are still many RPC design patterns in the Web Api. Going to a full rest api will require a complete redesign of the Api, the controller and methods, ORRS.Web, database, ORRS.Data and ORRS.DataAccess so its a huge change. Sid is also looking for a data driven design which I think is asking for a truely restful api design. Before we do full rest api, we must first convert the orrs.web to MVC or JS framework. Going to a full rest api is therefore far in the future.
 
+pickerwheel.com
 
 * Bundle summary validation
 "BundleName", "BundleType", "PatientVolume", "DaysOfService", "ExcludedDaysOfService"
