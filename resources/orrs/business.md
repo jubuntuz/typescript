@@ -1,3 +1,19 @@
+## concurrent thread/user
+[9:05 AM] Zhang, Jun
+    Hi Kuru, I am doing load test against rest api and have a question about how many users do we have in total? (to determine the  concurrent thread number)?
+​[9:07 AM] Ambalavanar, Kuru
+    we would have about 30 or so users in a given hour
+​[9:07 AM] Ambalavanar, Kuru
+    in toal we have like over 400
+​[9:07 AM] Ambalavanar, Kuru
+    but in a given time you would see about 30-40 users coming in
+​[9:09 AM] Zhang, Jun
+    ok. thanks
+
+## mckc - bundle A
+an MCKC patient (KFR >=10 or eGFR <15). 
+## mckc - bundle A - CRC
+
 # Treatments
 ## Insertion Event for all type of patients, mainly for MCKC patient
 insertion type: 

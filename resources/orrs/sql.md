@@ -1,6 +1,9 @@
+
 only these hospitals can do transplant - HSC, JHH,  KGH, TOH, LHS, SMH, UHN
 
-
+# tmtChangeCD
+id3,6,9 to AI
+va3,6,9 to AV
 
 select * from ModalityLocationType
 select * from modality where ModalityCORRCD = '281'
@@ -11,11 +14,7 @@ join LocationType lt on lt.LocationTypeID = lp.LocationTypeID
 join ModalityLocationType mlt on mlt.LocationTypeID = lp.LocationTypeID
 
 
-server name: `ORNTRN1ORDBS2`
 
-ORRSTest1 - 0RRST3$T123! - KGH
-ORRSTest2 - 0RRST3$T234! - LHS
-ORRSTest3 - 0RRST3$T345! - JHH
 
 UserName
 ORRSTest3
@@ -29,6 +28,10 @@ DefaultGroupId
 297
 DefaultGroupId
 298
+
+
+
+
 
  IHF/Selfcare locations are excluded from reporting
 
@@ -140,7 +143,17 @@ Select '--- usp_Census_Search  w/Lock flag ---' as ' '	--<< enter below the Mana
  
 
 ```
-
+```sql
+EXEC usp_Census_Search	
+@UserID='04b8ce1c-e2ec-4df3-b4e5-160d031c97b4', 
+@Groupid = 1,
+@TotalRecords= 100,
+-- optional
+@LocationCD= 'JHH', 
+@treatmentMonth = 4, 
+@treatmentYear = 2020,
+@Page=0, @PageSize=10
+```
 ```sql
 exec
     -- sp_helptext

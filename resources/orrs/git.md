@@ -3,7 +3,7 @@ https://stackoverflow.com/questions/13969050/creating-a-new-empty-branch-for-a-n
 
 Creating an orphan branch
 ```s
-git checkout --orphan mybranch
+git checkout --orphan baseline
 ```
 
 Delete everything in the orphan branch (don't forget the dot .)
@@ -17,3 +17,5 @@ you can now switch between branches
 git checkout master
 git checkout mybranch
 ```
+
+https://tfs.cancercare.on.ca/tfs/CCO%20Applications/ORN/_git/ORRS

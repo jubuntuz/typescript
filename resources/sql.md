@@ -25,7 +25,21 @@ WHERE OBJECT_DEFINITION(OBJECT_ID) LIKE '%usp_PatientTreatmentEvent_Validate%'
 SELECT Name
 FROM sys.objects
 WHERE OBJECT_DEFINITION(OBJECT_ID) LIKE '%65%' or OBJECT_DEFINITION(OBJECT_ID) Like '%MKC%' 
+```
 
-   
+
+```sql
+sp_help tableName
+sp_helptext usp_PatientPredlysSrvcDetails_Insert
+```
+
+* check when stored procedure was changed last time
+```sql
+SELECT name, create_date, modify_date 
+FROM sys.objects
+WHERE type = 'P'
+ORDER BY modify_date DESC
+```
+
  # ORRS
  ## run procedure

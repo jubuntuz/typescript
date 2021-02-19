@@ -107,3 +107,18 @@ Cindy
 ## Daily talk
 * we have today’s afternoon session at 1:30pm to discuss Cloud migration for QA Chapter meeting. I will forward invitation to you, please feel free to join. 
 * Please refer to the updated announcement attached
+* Hi Everyone, I have a hard stop at 4pm. 
+* please give some minutes to join
+* open floor, refresh our memory, I am taking it as no, that's all for today
+
+https://www.irrting.com/English/talkingbook/37915
+
+
+
+Good morning,
+	
+It is with mixed emotions that I announce that Chris Pentleton, our VP and Chief Architect, has resigned from Ontario Health, as of December 31, 2020. Chris joined the legacy Digital Services (aka eHealth Ontario) in July 2018. Prior to joining eHealth Ontario, he spent many years at the Ministry of Health Health Service Cluster. In both roles, Chris has led many initiatives, lending his knowledge and expertise in development of provincial scale information technology solutions that support our citizens and healthcare providers in accessing health information where and when they need it. He has brought fresh thinking and new ideas to solving our IT challenges to achieve modern digital platforms. Chris is now taking his skill, expertise, and enthusiasm to modernize digital platforms to other large-scale opportunities. 
+ 
+I want to thank Chris for his contributions to building our Digital Excellence in Health portfolio and working tirelessly to improve the healthcare system through integrated digital solutions. Please join me in wishing Chris all the best.
+ 
+Angela

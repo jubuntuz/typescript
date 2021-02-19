@@ -102,4 +102,34 @@ ProcessFile, GetFileRequestFromGuidMinimal, CommitUploadChanges
 UploadStreamToBlob  (method)
 
 
+# appsettings.development.json
 
+```json
+"ApplicationServices": "Server=tcp:orntrn1.database.windows.net,1433;Initial Catalog=ORRSDB_DEV2_AZ;Persist Security Info=False;User ID=orrsdbuser;Password=qwerty123456!;Connection Timeout=300;",
+
+"ReplicationReportingServices": "Server=tcp:orntrn1.database.windows.net,1433;Initial Catalog=ORRSDB_DEV2_AZ;Persist Security Info=False;User ID=orrsdbuser;Password=qwerty123456!;Connection Timeout=300;"
+```
+To
+```json
+    "ApplicationServices": "Data Source=ORNTRN1ORDBS2;Initial Catalog=ORRSDB_DEV1_Automation_Nasser;User Id=ORRSUser; Password=Abcd1234;Connection Timeout=300;Persist Security Info=False;",    
+    "ReplicationReportingServices": "Data Source=ORNTRN1ORDBS2;Initial Catalog=ORRSDB_DEV1_Automation_Nasser;User Id=ORRSUser; Password=Abcd1234;Connection Timeout=300;Persist Security Info=False;"
+```
+
+## launchSetting.json
+```json
+  "ASPNETCORE_ENVIRONMENT": "Development"
+```  
+To
+```json
+"ASPNETCORE_ENVIRONMENT": "LocalDevelopment"
+```
+
+
+```  
+  "CacheConnection": "orrs-distributed-cache-b.redis.cache.windows.net:6380,password=K9wOXUW6IK9ChCF7wyZUnzkdUVBGl5pLbcMVCAEscew=,ssl=True,abortConnect=False",
+  "StorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=ccoorrsblob;AccountKey=OFRrlrigHoUIYk42SqdOxJEA8CWlzP9T6jlHR3sBsy72fISp8k4dCATNQaknZArA6s1uP+s+22HTjCvKonQsFg==;EndpointSuffix=core.windows.net",
+To
+
+  "CacheConnection": "redis-orrs-dev-001.redis.cache.windows.net:6380,password=tfH3wyJ8+JiY9n8jU65CyVBzd+ELobPnci7FlvuqQVU=,ssl=True,abortConnect=False",
+  "StorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=storrswebdev001;AccountKey=iHR9qbm9NOsyHIwZCzKa2lcgf/xZbxXqQI7HKlXRbCV0VR7IcCqLVxUMw1bJ9V6F2Y4YmqZ72noZnPP3ILwU5A==;EndpointSuffix=core.windows.net",
+  
